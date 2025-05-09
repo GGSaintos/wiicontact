@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h2 Delete Contact
+  
+  div.warning
+    p Are you sure you want to delete #{contact.FirstName} #{contact.LastName}?
+    p This action cannot be undone.
+  
+  form(method="POST", action=`/${contact.ID}/delete`)
+    button(type="submit") Yes, Delete Contact
+  
+  p
+    a(href=`/${contact.ID}`) No, Cancel and Return to Contact

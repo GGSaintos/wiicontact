@@ -1,0 +1,158 @@
+block content
+  style.
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; 
+      min-height: 100vh;
+      overflow-y: auto; 
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 40px; /* spacing from bottom of screen */
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #2e5aac;
+      text-align: center;
+    }
+
+    fieldset {
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    legend {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #2e5aac;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccd1d9;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 6px;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    button,
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: #2e5aac;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1c3e80;
+    }
+
+    .button {
+      background-color: #ccc;
+      color: black;
+    }
+
+  .form-container
+    h2 Edit Contact
+
+    if error
+      .error-message
+        p= error
+
+    form(method="POST", action=`/${contact.ID}/edit`)
+      fieldset
+        legend Basic Info
+
+        label(for="FirstName") First Name:
+        input#FirstName(type="text", name="FirstName", value=contact.FirstName, required)
+
+        label(for="LastName") Last Name:
+        input#LastName(type="text", name="LastName", value=contact.LastName, required)
+
+        label(for="PhoneNumber") Phone Number:
+        input#PhoneNumber(type="tel", name="PhoneNumber", value=contact.PhoneNumber)
+
+        label(for="EmailAddress") Email Address:
+        input#EmailAddress(type="email", name="EmailAddress", value=contact.EmailAddress)
+
+      fieldset
+        legend Address
+
+        label(for="Street") Street Address:
+        input#Street(type="text", name="Street", value=contact.Street)
+
+        label(for="City") City:
+        input#City(type="text", name="City", value=contact.City)
+
+        label(for="State") State/Province:
+        input#State(type="text", name="State", value=contact.State)
+
+        label(for="Zip") Zip/Postal Code:
+        input#Zip(type="text", name="Zip", value=contact.Zip)
+
+        label(for="Country") Country:
+        input#Country(type="text", name="Country", value=contact.Country)
+
+      fieldset
+        legend Contact Preferences
+
+        label
+          input(type="checkbox", name="Contact_By_Phone", checked=contact.Contact_By_Phone === 1)
+          | Contact by phone
+        br
+
+        label
+          input(type="checkbox", name="Contact_By_Email", checked=contact.Contact_By_Email === 1)
+          | Contact by email
+        br
+
+        label
+          input(type="checkbox", name="Contact_By_Mail", checked=contact.Contact_By_Mail === 1)
+          | Contact by mail
+        br
+        br
+
+      button(type="submit") Save
+      a(href=`/${contact.ID}`, class="button") Cancel

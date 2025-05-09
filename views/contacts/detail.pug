@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  h2 Contact Info
+
+  h3 #{contact.FirstName} #{contact.LastName}
+
+  a(href="/") Back to list
+  hr
+
+  // PHONE
+  p
+    strong Phone number:
+    |  #{contact.PhoneNumber}
+  if contact.Contact_By_Phone
+    p May be contacted by phone or text
+  else
+    p May NOT be contacted by phone or text
+
+  hr
+
+  // EMAIL
+  p
+    strong Email address:
+    |  #{contact.EmailAddress}
+  if contact.Contact_By_Email
+    p May be contacted by email
+  else
+    p May NOT be contacted by email
+
+  hr
+
+  // ADDRESS
+  p
+    strong Address:
+    br
+    | #{contact.Street}
+    br
+    | #{contact.City}, #{contact.State} #{contact.Zip}
+    br
+    | #{contact.Country}
+  if contact.Contact_By_Mail
+    p May be contacted by mail
+  else
+    p May NOT be contacted by mail
+
+  hr
+
+  div
+    a(href=`/${contact.ID}/edit`, style="color: white; background-color: #007BFF; padding: 6px 12px; border-radius: 4px; text-decoration: none;") Edit Contact
+    span(style="margin: 0 8px;") |
+    a(href=`/${contact.ID}/delete`, style="color: white; background-color: #DC3545; padding: 6px 12px; border-radius: 4px; text-decoration: none;") Delete Contact

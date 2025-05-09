@@ -1,0 +1,60 @@
+body
+  style.
+    .navbar {
+      background-color: #2e5aac;
+      font-family: Arial, sans-serif;
+      padding: 10px 20px;
+    }
+
+    .navbar header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .navbar nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar img {
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+  .navbar
+    header
+      nav
+        a(href='/')
+          | Home
+          img(src='https://img.icons8.com/ios-filled/50/ffffff/home.png' alt='Home' style='width: 24px; height: 24px; vertical-align: middle;')
+        if user
+          .user-info
+            span Welcome, #{user.FirstName}!
+            a(href="/logout") Logout
+        else
+          .user-info
+            a(href="/login") Login
+            a(href="/signup") Sign Up
+
+  main
+    block content

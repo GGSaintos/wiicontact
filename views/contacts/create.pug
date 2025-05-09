@@ -1,0 +1,146 @@
+block content
+  style.
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #2e5aac;
+      text-align: center;
+    }
+
+    form fieldset {
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    legend {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #2e5aac;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccd1d9;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .form-buttons button,
+    .form-buttons a {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .btn-submit {
+      background-color: #2e5aac;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #1c3e80;
+    }
+
+    .btn-cancel {
+      background-color: #ccc;
+      color: #000;
+      border: none;
+      cursor: pointer;
+    }
+
+  .login-container
+    h2 Create Contact
+    form(action="/create", method="POST")
+      fieldset
+        legend Basic Info
+        label(for="Title") Title
+        select#Title(name="Title", required=true)
+          option(value="", disabled=true, selected=true) Select Title
+          option(value="Mr.") Mr.
+          option(value="Ms.") Ms.
+          option(value="Dr.") Dr.
+        label(for="FirstName") First Name
+        input(type="text", name="FirstName", id="FirstName", required=true)
+        label(for="LastName") Last Name
+        input(type="text", name="LastName", id="LastName", required=true)
+        label(for="PhoneNumber") Phone
+        input(type="text", name="PhoneNumber", id="PhoneNumber", required=true)
+        label(for="EmailAddress") Email
+        input(type="email", name="EmailAddress", id="EmailAddress", required=true)
+
+      fieldset
+        legend Address
+        label(for="Street") Street
+        input(type="text", name="Street", id="Street")
+        label(for="City") City
+        input(type="text", name="City", id="City")
+        label(for="State") State
+        input(type="text", name="State", id="State")
+        label(for="Zip") Zip
+        input(type="text", name="Zip", id="Zip")
+        label(for="Country") Country
+        input(type="text", name="Country", id="Country")
+
+
+      fieldset
+        legend Contact Preferences
+        label
+          input(type="checkbox", name="Contact_By_Phone")
+          | Contact by phone
+        label
+          input(type="checkbox", name="Contact_By_Email")
+          | Contact by email
+        label
+          input(type="checkbox", name="Contact_By_Mail")
+          | Contact by mail
+          
+      input(type="hidden", name="Latitude")
+      input(type="hidden", name="Longitude")
+
+      .form-buttons
+        button(type="submit", class="btn-submit") Add
+        a(href="/", class="btn-cancel") Cancel

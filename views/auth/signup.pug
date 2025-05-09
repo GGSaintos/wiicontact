@@ -1,0 +1,117 @@
+block content
+  style.
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-container {
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-container h2 {
+        margin-bottom: 20px;
+        color: #2e5aac;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccd1d9;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .login-btn {
+        width: 100%;
+        background-color: #2e5aac;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background-color: #1c3e80;
+    }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .signup-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .signup-link a {
+        color: #2e5aac;
+        text-decoration: none;
+    }
+
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
+
+  .login-container
+    h2 Sign Up
+
+    if error
+      .error-message
+        p= error
+
+    form(method="POST", action="/signup")
+      .form-group
+        label(for="firstName") First Name
+        input#firstName(type="text", name="firstName", required)
+
+      .form-group
+        label(for="lastName") Last Name
+        input#lastName(type="text", name="lastName", required)
+
+      .form-group
+        label(for="username") Username
+        input#username(type="text", name="username", required)
+
+      .form-group
+        label(for="password") Password
+        input#password(type="password", name="password", required)
+
+      .form-group
+        label(for="confirmPassword") Confirm Password
+        input#confirmPassword(type="password", name="confirmPassword", required)
+
+      button.login-btn(type="submit") Sign Up
+
+    .signup-link
+      p Already have an account?
+      a(href="/login") Login here
+      br
+      a(href="/") Back to Home

@@ -1,0 +1,118 @@
+extends ../layout
+
+block content
+  style.
+    .contact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .contact-table th,
+    .contact-table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    .contact-table thead {
+      background-color: #f0f0f0;
+    }
+
+    .actions {
+      margin-bottom: 15px;
+    }
+
+    .contact-link {
+      text-decoration: none;
+      color: #2e5aac;
+      font-weight: bold;
+    }
+
+    .button {
+      padding: 5px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 13px;
+      margin-right: 5px;
+      display: inline-block;
+      color: white;
+    }
+
+    .button.primary {
+      background-color: #2e5aac;
+    }
+
+    td.actions {
+      text-align: center;
+    }
+
+    #map {
+      height: 400px;
+      margin-top: 30px;
+      border: 1px solid #ccc;
+    }
+
+  h2 Contact List
+
+  .actions
+    a.button.primary(href="/create") Create a new contact
+
+  input#nameFilter(type="text", placeholder="Search by name", style="margin-top: 10px; padding: 6px; width: 250px;")
+
+  if contacts && contacts.length > 0
+    table.contact-table
+      thead
+        tr
+          th Name
+          th Phone
+          th Email
+          th Address
+          th Preferences
+          th Latitude
+      tbody
+        each contact in contacts
+          tr(data-name=`${contact.FirstName} ${contact.LastName}`)
+            td
+              a.contact-link(href=`/${contact.ID}`) #{contact.FirstName} #{contact.LastName}
+            td= contact.PhoneNumber || 'N/A'
+            td= contact.EmailAddress || 'N/A'
+            td
+              a.contact-link(href="#", onclick="flyToLocationFromElement(event,this)", data-lat=contact.Latitude, data-lng=contact.Longitude)
+                | #{contact.Street || ''}, #{contact.City || ''}, #{contact.State || ''} #{contact.Zip || ''}, #{contact.Country || ''}
+            td
+              label
+                input(type="checkbox", checked=contact.Contact_By_Phone === 1, disabled=true)
+                | Phone
+              br
+              label
+                input(type="checkbox", checked=contact.Contact_By_Email === 1, disabled=true)
+                | Email
+              br
+              label
+                input(type="checkbox", checked=contact.Contact_By_Mail === 1, disabled=true)
+                | Mail
+            td= contact.Latitude || 'N/A'
+  else
+    p No contacts found. Add your first contact!
+
+  #map(style="height: 400px; margin-top: 30px; border: 1px solid #ccc")
+
+  link(rel="stylesheet", href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css")
+  script(src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js")
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+
+  script.
+    const contacts = !{JSON.stringify(contacts)};
+  script(src="/contacts-map.js")
+  script.
+    const nameFilterInput = document.getElementById('nameFilter');
+    nameFilterInput.addEventListener('input', () => {
+      const value = nameFilterInput.value.toLowerCase();
+      const rows = document.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const name = row.dataset.name.toLowerCase();
+        row.style.display = name.includes(value) ? '' : 'none';
+      });
